@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './features/auth/login/login';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    loadComponent: () =>
+      import('./features/auth/login/login').then((m) => m.LoginComponent),
   },
+  { path: '**', redirectTo: '' },
 ];

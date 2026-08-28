@@ -8,7 +8,7 @@
       <!-- Logo -->
       <div class="brand">
         <div class="brand-icon">
-          <span>+</span>
+          <span aria-hidden="true">+</span>
         </div>
 
         <div>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="health-card">
-              <div class="heart-icon">♥</div>
+              <div class="heart-icon" aria-hidden="true">♥</div>
 
               <div class="lines">
                 <span></span>
@@ -64,7 +64,7 @@
             </div>
 
             <div class="info-card">
-              <div class="mini-icon">♥</div>
+              <div class="mini-icon" aria-hidden="true">♥</div>
               <div class="lines">
                 <span></span>
                 <span></span>
@@ -72,7 +72,7 @@
             </div>
 
             <div class="info-card">
-              <div class="mini-icon">✓</div>
+              <div class="mini-icon" aria-hidden="true">✓</div>
               <div class="lines">
                 <span></span>
                 <span></span>
@@ -86,7 +86,7 @@
         <div class="doctor doctor-left">
           <div class="doctor-head"></div>
           <div class="doctor-body">
-            <div class="stethoscope">◯</div>
+            <div class="stethoscope" aria-hidden="true">◯</div>
           </div>
         </div>
 
@@ -97,7 +97,7 @@
         </div>
 
         <!-- Escudo -->
-        <div class="security-badge">
+        <div class="security-badge" aria-hidden="true">
           ✓
         </div>
 
@@ -107,7 +107,7 @@
       <div class="benefits">
 
         <div class="benefit">
-          <div class="benefit-icon">✓</div>
+          <div class="benefit-icon" aria-hidden="true">✓</div>
 
           <div>
             <h3>Información segura</h3>
@@ -118,7 +118,7 @@
         </div>
 
         <div class="benefit">
-          <div class="benefit-icon">👥</div>
+          <div class="benefit-icon" aria-hidden="true">👥</div>
 
           <div>
             <h3>Trabajo en equipo</h3>
@@ -129,7 +129,7 @@
         </div>
 
         <div class="benefit">
-          <div class="benefit-icon">↗</div>
+          <div class="benefit-icon" aria-hidden="true">↗</div>
 
           <div>
             <h3>Decisiones informadas</h3>
@@ -159,6 +159,31 @@
         </p>
       </div>
 
+      @if (isAuthenticated) {
+
+        <div class="user-panel">
+
+          <div class="user-avatar" aria-hidden="true">✓</div>
+
+          <h3>Sesión iniciada</h3>
+
+          <p class="user-name">{{ accountName }}</p>
+
+          <p class="user-email">{{ accountEmail }}</p>
+
+          <button
+            type="button"
+            class="login-button"
+            (click)="logout()">
+
+            Cerrar sesión
+
+          </button>
+
+        </div>
+
+      } @else {
+
       <form>
 
         <!-- Email -->
@@ -169,7 +194,7 @@
           </label>
 
           <div class="input-wrapper">
-            <span class="input-icon">✉</span>
+            <span class="input-icon" aria-hidden="true">✉</span>
 
             <input
               id="email"
@@ -190,7 +215,7 @@
 
           <div class="input-wrapper">
 
-            <span class="input-icon">🔒</span>
+            <span class="input-icon" aria-hidden="true">🔒</span>
 
             <input
               id="password"
@@ -235,7 +260,7 @@
           type="submit"
           class="login-button">
 
-          <span>→</span>
+          <span aria-hidden="true">→</span>
 
           Iniciar sesión
 
@@ -256,12 +281,13 @@
       </div>
 
 
-      <!-- Microsoft -->
       <button
         type="button"
-        class="microsoft-button">
+        class="microsoft-button"
+        (click)="loginWithMicrosoft()"
+        [disabled]="authenticating">
 
-        <span class="microsoft-logo">
+        <span class="microsoft-logo" aria-hidden="true">
 
           <span></span>
           <span></span>
@@ -271,7 +297,7 @@
         </span>
 
         <span>
-          Iniciar sesión con Microsoft
+          {{ authenticating ? 'Autenticando…' : 'Iniciar sesión con Microsoft' }}
         </span>
 
       </button>
@@ -288,6 +314,12 @@
 
       </p>
 
+      }
+
+      @if (error) {
+        <p class="login-error" role="alert">{{ error }}</p>
+      }
+
     </div>
 
   </section>
@@ -301,7 +333,7 @@
 
   <div class="footer-brand">
 
-    <span class="footer-icon">
+    <span class="footer-icon" aria-hidden="true">
       ✓
     </span>
 
